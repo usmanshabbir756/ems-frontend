@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createDepartment, getDepartmentById } from '../services/DepartmmentService';
+import { createDepartment, getDepartmentById, updateDepartment } from '../services/DepartmmentService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const DepartmentComponent = () => {
@@ -29,12 +29,17 @@ const DepartmentComponent = () => {
         if(handelValdation()){
         const department={departmentName,departmentDescription};
         console.log(department);
-            
+            if(id){
+                updateDepartment(id,department).then(response=>{
+                    console.log(response.data)
+                }).catch(error=>console.log(error));
+            }
+            else{
                 createDepartment(department).then((response)=>{
                     console.log(response.data)
                 }).catch(error=>console.log(error));
-            
-        navigator("/departments");
+            } 
+            navigator("/departments");
         }
     }
 
