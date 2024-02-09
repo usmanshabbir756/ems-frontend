@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllDepartment } from '../services/DepartmmentService';
+import { Link } from 'react-router-dom';
 
 const ListDepartmentComponent = () => {
 
@@ -14,6 +15,7 @@ const ListDepartmentComponent = () => {
   return (
     <div className='container'>
         <h2 className='text-center mt-3'>List Of Department</h2>
+        <Link to="/add-department" className='btn btn-primary mb-2'>Department</Link>
         <table className='table table-striped table-bordered text-start'>
             <thead>
                 <tr>
