@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { createDepartment } from '../services/DepartmmentService';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { createDepartment, getDepartmentById } from '../services/DepartmmentService';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const DepartmentComponent = () => {
 
@@ -13,15 +13,27 @@ const DepartmentComponent = () => {
     });
 
     const navigator=useNavigate();
+    const {id}=useParams();
+
+    useEffect(()=>{
+        getDepartmentById(id).then(response=>{
+            setDepartmentName(response.data.departmentName);
+            setDepartmentDescription(response.data.departmentDescription)
+        }).catch(error=>console.error(error));
+    },[id])
+
+
 
     function saveOrUpdateDepartment(e){
         e.preventDefault();
         if(handelValdation()){
         const department={departmentName,departmentDescription};
         console.log(department);
-        createDepartment(department).then((response)=>{
-            console.log(response.data)
-        }).catch(error=>console.log(error));
+            
+                createDepartment(department).then((response)=>{
+                    console.log(response.data)
+                }).catch(error=>console.log(error));
+            
         navigator("/departments");
         }
     }
