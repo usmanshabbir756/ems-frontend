@@ -6,12 +6,12 @@ const HeaderComponent = () => {
     <div>
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
             <a className='navbar-brand' href='#'>Employee Managment System</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
                   <NavLink to={"/employees"} className="nav-link">Employee</NavLink>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <NavLink to={"/departments"} className="nav-link">Department</NavLink>
                 </li>
               </ul>

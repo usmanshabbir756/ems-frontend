@@ -1,5 +1,5 @@
 import React , {useState , useEffect} from 'react'
-import { deleteEmployee, listEmployees } from '../services/ListEmployeesService';
+import { deleteEmployee, listEmployees } from '../services/EmployeesService';
 import { useNavigate } from 'react-router-dom';
 
 const ListEmployeesComponent = () => {
@@ -10,6 +10,7 @@ const ListEmployeesComponent = () => {
     useEffect(()=>{
         listEmployees().then((response)=> setEpmloyees(response.data)).catch(error=>console.error(error));
     },[employees])
+    
 
     function addEmployee(){
         navigator('/add-employee');
