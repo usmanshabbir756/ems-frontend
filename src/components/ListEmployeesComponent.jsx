@@ -15,6 +15,10 @@ const ListEmployeesComponent = () => {
         navigator('/add-employee');
     }
 
+    function handelUpdate(id){
+        navigator(`/edit-employee/${id}`);
+    }
+
   return (
     <div className='container'>
         <h2 className='text-center mt-3'>List Of Employees</h2>
@@ -26,6 +30,7 @@ const ListEmployeesComponent = () => {
                     <th>Employee First Name</th>
                     <th>Employee Last Name</th>
                     <th>Employee Email ID</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +41,9 @@ const ListEmployeesComponent = () => {
                             <td>{employee.firstName}</td>
                             <td>{employee.lastName}</td>
                             <td>{employee.email}</td>
+                            <td>
+                                <button className='btn btn-info' onClick={()=> handelUpdate(employee.id)}>Update</button>
+                            </td>
                         </tr>
                     )
                 }
