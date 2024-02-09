@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createEmployee } from '../services/ListEmployeesService';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,11 +7,17 @@ const EmployeeComponent = () => {
     const [lastName,setLastName]=useState('');
     const [email,setEmail]=useState('');
 
+    const[error,setError]=useState({
+        firstName:"",
+        lastName:"",
+        email:""
+    });
+
     const navigator=useNavigate();
 
     function handleSubmit(e){
         e.preventDefault();
-
+        if(handelValdation()){
         const employee={firstName,lastName,email};
         console.log(employee);
 
@@ -19,12 +25,39 @@ const EmployeeComponent = () => {
             console.log(response.data);
             navigator('/employees');
         })
+        }
     }
 
-
+    function handelValdation(){
+        let valid=true;
+        const errorCopy={... error};
+        if(firstName.trim()){
+            errorCopy.firstName="";
+        }
+        else{
+            errorCopy.firstName="First Name Not Invalid";
+            valid=false;
+        }
+        if(lastName.trim()){
+            errorCopy.lastName="";
+        }
+        else{
+            errorCopy.lastName="Last Name  Not Invalid";
+            valid=false;
+        }
+        if(email.trim()){
+            errorCopy.email="";
+        }
+        else{
+            errorCopy.email="Email Not Invalid";
+            valid=false;
+        }
+        setError(errorCopy);
+        return valid;
+    }
 
   return (
-    <div className='container'>
+    <div className='container mb-5'>
         <br/><br/>
         <div className='row'>
             <div className='card col-md-6 offset-md-3 offset-md-3'>
@@ -38,9 +71,10 @@ const EmployeeComponent = () => {
                                 placeholder='Enter First Name'
                                 value={firstName}
                                 name='firstName'
-                                className='form-control'
+                                className={`form-control ${ error.firstName ? "is-invalid" : "" }`}
                                 onChange={(e)=>setFirstName(e.target.value)}
                             ></input>
+                            { error.firstName && <div className='invalid-feedback'>{error.firstName}</div> }
                         </div>
                         <div className='form-group'>
                             <label className='form-label'>Last Name:</label>
@@ -49,20 +83,22 @@ const EmployeeComponent = () => {
                                 placeholder='Enter Last Name'
                                 value={lastName}
                                 name='lastName'
-                                className='form-control'
+                                className={`form-control ${ error.lastName ? "is-invalid" : "" }`}
                                 onChange={(e)=>setLastName(e.target.value)}
                             ></input>
+                            { error.lastName && <div className='invalid-feedback'>{error.lastName}</div> }
                         </div>
                         <div className='form-group'>
                             <label className='form-label'>Email:</label>
                             <input 
                                 type='email'
-                                placeholder='Enter First Name'
+                                placeholder='Enter Email'
                                 value={email}
                                 name='email'
-                                className='form-control'
+                                className={`form-control ${ error.email ? "is-invalid" : "" }`}
                                 onChange={(e)=>setEmail(e.target.value)}
                             ></input>
+                            { error.email && <div className='invalid-feedback'>{error.email}</div> }
                         </div>
                         <button className='btn btn-success m-2' onClick={handleSubmit}>Submit</button>
                     </form>
