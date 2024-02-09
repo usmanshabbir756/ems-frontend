@@ -9,7 +9,7 @@ const ListEmployeesComponent = () => {
 
     useEffect(()=>{
         listEmployees().then((response)=> setEpmloyees(response.data)).catch(error=>console.error(error));
-    },[])
+    },[employees])
 
     function addEmployee(){
         navigator('/add-employee');
