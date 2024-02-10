@@ -18,9 +18,7 @@ const ListDepartmentComponent = () => {
     }
 
     function deleteDepartmentByID(departmentId){
-        deleteDepartment(departmentId).then(response=>{
-            console.log(response.data)
-        }).catch(error=>console.error(error));
+        deleteDepartment(departmentId).then(response=>{}).catch(error=>console.error(error));
     }
 
   return (

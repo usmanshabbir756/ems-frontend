@@ -16,10 +16,13 @@ const DepartmentComponent = () => {
     const {id}=useParams();
 
     useEffect(()=>{
-        getDepartmentById(id).then(response=>{
-            setDepartmentName(response.data.departmentName);
-            setDepartmentDescription(response.data.departmentDescription)
-        }).catch(error=>console.error(error));
+        if(id){
+            getDepartmentById(id).then(response=>{
+                setDepartmentName(response.data.departmentName);
+                setDepartmentDescription(response.data.departmentDescription)
+            }).catch(error=>console.error(error));
+        }
+        
     },[id])
 
 

@@ -8,6 +8,6 @@ export  const createDepartment=(department)=> axios.post(REST_API_BASE_URL,depar
 
 export const getDepartmentById=(id)=>axios.get(REST_API_BASE_URL + '/' + id);
 
-export const updateDepartment=(id,department)=>axios.post(REST_API_BASE_URL + "/" + id,department);
+export const updateDepartment=(id,department)=>axios.put(REST_API_BASE_URL + "/" + id,department);
 
 export const deleteDepartment=(id)=> axios.delete(REST_API_BASE_URL +"/" + id);
